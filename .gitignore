@@ -1,0 +1,14 @@
+.idea
+.sst
+.build
+node_modules
+coverage
+
+.env
+
+*.js
+*.d.ts
+
+!resources/lambda/layers/utilities/nodejs/node_modules
+!jest.config.js
+!process-results.js
