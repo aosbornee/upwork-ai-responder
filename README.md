@@ -1,17 +1,17 @@
+# How To's
 
-Upwork scraper
+- Add in Open AI api key to env variables
+- Add in slack webhook URL to env varialbes
 
+## How to get slack webhook URL
 
-create cdk stack ✅
+https://slack.com/apps/A0F7XDUAZ-incoming-webhooks?tab=more_info
 
-create lambda function and attach a cron to run every 5 minutes
+If you've got a AWS credentials setup on your machine then you can simply run the below commands
 
-lambda will make call to rss  ✅
+```bash
+npm install
+npm start
+```
 
-check if any new jobs (which fit our filters)
-
-if new jobs, pass proposal into GPT-3, along with my experience, website and a loom video
-
-then gpt-3 will return personalised proposal
-
-then pass this into slack channel
+You can then trigger the lambda which will then run every 5 minutes from 9-17pm, Monday to Friday

@@ -4,27 +4,21 @@ import getNewJobs from "utilities/general/get-new-jobs";
 import craftUniqueProposal from "utilities/general/craft-unique-proposal";
 import sendJobsToSlack from "utilities/general/send-jobs-to-slack";
 
-
-
-
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
+  const feed = await parseFeed();
 
-  
-  const feed = await parseFeed()
+  if (feed.items.length === 0) throw new Error("no items in feed");
 
-  if (feed.items.length === 0) throw new Error("no items in feed")
+  const newJobs = await getNewJobs(feed);
 
-  const newJobs = await getNewJobs(feed)
-
-  console.log(newJobs.length)
-
+  console.log(newJobs.length);
 
   if (newJobs.length) {
-    const jobsWithProposals = await craftUniqueProposal(newJobs)
+    const jobsWithProposals = await craftUniqueProposal(newJobs);
     await sendJobsToSlack(jobsWithProposals);
   }
 
-    return {
+  return {
     statusCode: 204,
     headers: { "Content-Type": "text/plain" },
     body: "",
